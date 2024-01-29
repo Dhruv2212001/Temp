@@ -1,0 +1,7 @@
+.btn{
+    height: 48px;
+    width: 160px;
+}
+.error{
+    border: 2px solid red;
+}

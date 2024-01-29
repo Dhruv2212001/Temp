@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+/* background-color: hwb(0 95% 5%); */
+ /* .color{
+    background-image: url(../src/assets/hrms.jpg);
+ }  */
+
+@import 'ngx-toastr/toastr'; 
+html, body { height: 100%; }
+
+body { margin: 0; }
+
+/* :root {
+   --font-family: 'Poppins', sans-serif;
+   --font-size-normal: 16px;
+   --font-size-heading:24px;
+} */
+* {
+   font-family:'Poppins', sans-serif;
+   }

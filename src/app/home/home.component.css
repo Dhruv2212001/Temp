@@ -1,0 +1,57 @@
+.example-card1 {
+    position: relative;
+    left: 3%;
+    margin-top: 1%;
+    height: 10%;
+    width: 15%;
+    color: white;
+    background: linear-gradient(to right top, #e00b23, #ee3f47, #f04946, #f17d73, #e9a395);
+  }
+
+.example-card2{
+    position: relative;
+    left: 3%;
+    margin-top: 1%;
+    height: 10%;
+    width: 15%;
+    color: white;
+    background-image: linear-gradient(to right top, #1d976c, #40af7f, #5cc792, #78e0a5, #93f9b9);
+    
+}
+.example-card3{
+    position: relative;
+    left: 3%;
+    margin-top: 1%;
+    height: 10%;
+    width: 15%;
+    color: white;
+    background: #667eea;
+    background: linear-gradient(to right, rgba(103, 124, 221, 0.5), rgba(83, 5, 160, 0.5))
+}
+.example-card4{
+    position: relative;
+    left: 3%;
+    margin-top: 1%;
+    height: 10%;
+    width: 15%;
+    color: white;
+    background: linear-gradient(to bottom, #e72c83 0%, #a742c6 100%);
+}
+.example-card5{
+    position: relative;
+    left: 3%;
+    margin-top: 1%;
+    height: 10%;
+    width: 15%;
+    color: white;
+    background: linear-gradient(to bottom, #afee4b 0%, rgb(5, 94, 121) 100%);
+}
+.card-x{
+    height: 400px;
+    /* width: 25%; */
+    position: relative;
+    left: 3%;
+    margin-top: 3%;
+    background: white
+}
+  

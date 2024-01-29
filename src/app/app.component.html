@@ -1,0 +1,82 @@
+<!-- <app-layout (newItemEvent)="addItem($event)" [flag]="toggleFlag"></app-layout> -->
+<!-- <app-home></app-home> -->
+<!-- <div class="container-fluid mt-3">
+    <mat-sidenav-container class="example-container"> -->
+        <!-- <mat-sidenav #sidenav [mode]="'push'"> -->
+        <!-- <mat-sidenav #sidenav #clickTrigger [mode]="'side'"  opened>
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a >
+                                HRMS Portal
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/home">Home</a>
+
+                        </li>
+                        <li>
+                            <a routerLink="/dashboard">Dashboard</a>
+
+                        </li>
+                        <li>
+                            <a routerLink="/employee">Employee</a>
+                        </li>
+                        <li>
+                            <a routerLink="/attendance">Attendance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#sidemenu" data-bs-toggle="collapse" aria-expanded="false"
+                                class="dropdown-toggle">Leave</a>
+                            <ul class="nav collapse list-unstyled" id="sidemenu" data-bs-parent="#sidebar-wrapper">
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/leave1" aria-current="page" href="menu-item">Apply
+                                        leave</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/leave" aria-current="page" href="menu-item">
+                                        Employee Leave</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a routerLink="/salary">Salary</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#">Shortcuts</a>
+                        </li>
+                        <li>
+                            <a href="#">Overview</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li>
+
+                    </ul>
+                </div>
+            </div>
+        </mat-sidenav>
+       
+    </mat-sidenav-container> -->
+
+
+<!-- </div> -->
+<!-- <app-layout></app-layout> -->
+
+<app-layout *ngIf="menuType != 'default'"(menuState)='burgerClicked($event)'></app-layout>
+<ng-toast></ng-toast>
+<app-sidebar [subMenuState]="subMenuState"></app-sidebar>
+
+<app-footer *ngIf="menuType != 'default'"></app-footer>
+

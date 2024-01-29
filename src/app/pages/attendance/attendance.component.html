@@ -1,0 +1,139 @@
+<!-- <app-home></app-home> -->
+<div class="container-fluid">
+    <div class="div m-3 p-5">
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <div class="row">
+                            <div class="col-6 text-white">
+                                Attendance Portal
+    
+                            </div>
+                            <div class="col-6 text-right">
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Sr No</th>
+                                    <th>Name</th>
+                                    <!-- <th>Contact No</th> -->
+                                    <th>Day</th>
+                                    <th>In Time</th>
+                                    <th>Out Time</th>
+                                    <th>Is Full Days</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" *ngFor="let item of attendanceArray; let sr= index">
+                                    <td>{{sr+1}}</td>
+                                    <td>{{item.empname}}</td>
+                                    <!-- <td>{{item.empcontact}}</td> -->
+                                    <td>{{item.attendanceDate | date: 'dd-MMM-yyyy'}}</td>
+                                    <td>{{item.inTime }}</td>
+                                    <td>{{item.outTime}}</td>
+                                    <td>{{item.isFullDay? 'Yes' : 'No'}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <button class="btn btn-success btn-sm margin-left"
+                                            (click)="onEdit(item.id)">Edit</button>
+                                        <button class="btn btn-danger btn-sm margin-left"
+                                            (click)="onDelete(item.id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <div class="row">
+                            <div class="col-6 text-white">
+                                Attendance Portal
+    
+                            </div>
+                            <div class="col-6 text-right">
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color: rgb(242, 248, 248);">
+                        <form [formGroup]="attendanceForm" (ngSubmit)=" submitForm()">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">Select Employee Name</label>
+                                    <select name="employeeId" class="form-control" formControlName="empname"  [ngClass]="{ 'is-invalid': f['empname'].touched && f['empname'].errors, 'is-valid': f['empname'].valid }"
+                                    required >
+                                        <option value=""></option>
+                                        <option *ngFor="let emp of employeeArray" [value]="emp.empname">{{emp.empname}}
+                                        </option>
+                                    </select>
+                                    <small class="text-danger" *ngIf="f['empname'].touched && f['empname'].errors">Employee Name is
+                                        required</small>
+                                </div>
+                                <div class="col-6">
+                                    <label for="">Attendance Date</label>
+                                    <input type="date" class="form-control" name="attendanceDate"
+                                        formControlName="attendanceDate"  [ngClass]="{ 'is-invalid': f['attendanceDate'].touched && f['attendanceDate'].errors, 'is-valid': f['attendanceDate'].valid }"
+                                        required >
+                                        <small class="text-danger" *ngIf="f['attendanceDate'].touched && f['attendanceDate'].errors"> Date is
+                                            required</small>
+    
+                                </div>
+                                <div class="col-6">
+                                    <label for="">InTime</label>
+                                    <input type="time" class="form-control" name="inTime" formControlName="inTime" format = 'hh:mm A'  [ngClass]="{ 'is-invalid': f['inTime'].touched && f['inTime'].errors, 'is-valid': f['inTime'].valid }"
+                                    required>
+                                    <small class="text-danger" *ngIf="f['inTime'].touched && f['inTime'].errors"> In Time is
+                                        required</small>
+    
+                                </div>
+                                <div class="col-6">
+                                    <label for="">Out Time</label>
+                                    <input type="time" class="form-control" name="outTime" formControlName="outTime"  [ngClass]="{ 'is-invalid': f['outTime'].touched && f['outTime'].errors, 'is-valid': f['outTime'].valid }"
+                                    required>
+                                    <small class="text-danger" *ngIf="f['outTime'].touched && f['outTime'].errors"> Out Time is
+                                        required</small>
+                                </div>
+                                <div class="col-6">
+                                    <!-- <label for=""> Full Day</label>
+                                    <input type="checkbox" name="isFullDay" formControlName="isFullDay"> -->
+    
+                                    <div class="form-check form-switch mt-3">
+                                        <input class="form-check-input" type="checkbox" formControlName="isFullDay"  role="switch" id="flexSwitchCheckDefault" [value]="f['isFullDay'].value" checked>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault" >{{f['isFullDay'].value == true ? "Full Day" : " Half Day"}}</label>
+                                    </div>
+                                </div>
+                                   
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-center mt-3 mb-2">
+                                    <button class="btn btn-secondary btn-sm" type="reset"
+                                        (click)="onReset() ">Reset</button>
+                                </div>
+                                <div class="col-6 text-center  mt-3 mb-2">
+                                    <button class=" button not-allowed btn-sm" style="border-radius: 8px;" *ngIf="!route_id" type="submit" [disabled]="(this.disable || !this.attendanceForm.valid )" type="submit"
+                                        (click)="onSave()">Save Employee</button>
+                                    <button class="btn btn-warning btn-sm" *ngIf="route_id" type="submit"
+                                        (click)="onUpdate()">Update Employee</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+</div>

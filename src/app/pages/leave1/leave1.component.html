@@ -1,0 +1,202 @@
+<mat-card>
+  <div>
+    <mat-card-header style="height: 100px;">
+      <button class="buttonleave" (click)="openpopup(viewLeaveForm)" mat-raised-button color="primary"
+        matTooltip="Click to Leave">Add Leave
+        (+)</button>
+    </mat-card-header>
+  </div>
+
+
+</mat-card>
+
+
+<!-- <h2>Simple Angular mat-table</h2> -->
+
+<mat-form-field class="example-full-width searchbox mt-5" appearance="outline">
+  <mat-label>Search</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input type="search" class="search-bar custom-height" matInput (keyup)="applyFilter($event)">
+  <!-- <button matSuffix mat-button class="trigger" (keyup)="applyFilter($event)"></button> -->
+  <!-- <mat-label style="font-family: 'Poppins', sans-serif;" class="input">Search</mat-label> -->
+
+</mat-form-field>
+<div class="mat-elevation-z8" style="text-align: center;">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let sr= index">{{sr+1}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fromDate">
+      <th mat-header-cell *matHeaderCellDef>Start Date</th>
+      <td mat-cell *matCellDef="let element">{{element.fromDate| date}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="toDate">
+      <th mat-header-cell *matHeaderCellDef>End Date</th>
+      <td mat-cell *matCellDef="let element">{{element.toDate| date}}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef>Reason</th>
+      <td mat-cell *matCellDef="let element">{{element.reason}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">Pending</td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">Edit</td>
+      <td mat-cell *matCellDef="let element">Delete</td>
+    </ng-container> -->
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn"
+          (click)="onDelete(element.id)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+
+
+  <ng-template #viewLeaveForm>
+
+    <div>
+      <mat-dialog-actions class="closepopup">
+        <button (click)="closepopup()" mat-button color="primary" matDialogClose matTooltip="Close form">
+          <mat-icon style="font-size: 25px;  height: 40px;
+          width: 36px;
+          position: relative;
+          left: 20px;">close</mat-icon></button>
+      </mat-dialog-actions>
+    </div>
+
+    <!-- <div class="card"> -->
+    <h1 class="text-center mt-3">Apply For Leave</h1>
+    <div class="card-body">
+      <form [formGroup]="leaveForm" (ngSubmit)=" onSubmit()">
+        <div class="row">
+          <h2 style="font-family: 'Poppins', sans-serif;">Leave Date</h2>
+          <div class="row1">
+            <mat-slide-toggle [(ngModel)]="isChecked" (click)="MultiDay()" formControlName="isFullDay">{{isChecked ==
+              true ? "Multiple Day" : " One Day"}}</mat-slide-toggle>
+            <mat-slide-toggle *ngIf="!isChecked" class="mx-4" (click)="HalfFullDay()">{{days == true ? "Full Day" : "
+              Half Day"}}</mat-slide-toggle>
+          </div>
+          <div class="col-12">
+            <label for="">From</label>
+            <div class="row">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Start Date:</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fromDate" placeholder="Date:">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Please Enter Start Date</mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <div>
+                  <input type="date" style="background: aliceblue;" class="form-control" name="startDate"
+                    formControlName="startDate"
+                    [ngClass]="{ 'is-invalid': f['startDate'].touched && f['startDate'].errors, 'is-valid': f['startDate'].valid }">
+                  <small class="text-danger"  *ngIf="f['startDate'].touched  && f['startDate'].errors || f['startDate'].dirty && f['startDate'].errors"> Date is
+                    required</small>
+
+                </div> -->
+            <div *ngIf="isChecked">
+              <label for="">To</label>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                  <mat-label>End Date:</mat-label>
+                  <input formControlName="toDate" matInput [matDatepicker]="date" placeholder="Date:">
+                  <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                  <mat-datepicker #date></mat-datepicker>
+                  <mat-error>Please Enter End Date</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <input type="date" style="background: aliceblue;" class="form-control" name="endDate"
+                    formControlName="endDate"
+                    [ngClass]="{ 'is-invalid': f['endDate'].touched && f['endDate'].errors, 'is-valid': f['endDate'].valid }">
+                  <small class="text-danger"  *ngIf="f['endDate'].touched  && f['endDate'].errors || f['endDate'].dirty && f['endDate'].errors">Date is
+                    required</small> -->
+            </div>
+          </div>
+          <!-- 
+              <div class="myradio form-check form-check-inline mt-3 well ">
+                <input class="form-check-input radio-class" type="radio" name="fullDayOptions" id="inlineRadio1"
+                  value="option1" checked />
+                <label class="form-check-label" for="inlineRadio1">Full day</label>
+
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input radio-class" type="radio" name="fullDayOptions" id="inlineRadio2"
+                    value="option4" />
+                  <label class="form-check-label" for="inlineRadio2">Half Day</label>
+                </div>
+              </div> -->
+          <div class="">
+            <label for="exampleInputPassword1" class="form-label">Reason*</label>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Reason:</mat-label>
+                <input matInput type="text" placeholder="Tell Me The Reason" formControlName="reason">
+                <mat-error>This Field is Required</mat-error>
+              </mat-form-field>
+
+
+              <label for="exampleInputPassword1" class="form-label">Applied To</label>
+              <mat-form-field appearance="outline">
+                <mat-label>Select Manager:</mat-label>
+                <mat-select matInput formControlName="LeaveRequests"  (selectionChange)="onRoleSelectionChange($event.value)" required>
+                  <mat-option *ngFor="let role of Role"  [value]="role" >{{role.userName}}</mat-option>
+                  <!-- Add an empty option with a label -->
+                  <mat-option value="" disabled>Choose a role</mat-option> 
+                </mat-select>
+                <mat-error>please select your role</mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <input type="text" formControlName="Reason" class="form-control" id="exampleInputPassword1" required
+                  placeholder="Tell Me The Reason..."
+                  [ngClass]="{ 'is-invalid': f['Reason'].touched && f['Reason'].errors, 'is-valid': f['Reason'].valid }"
+                  required /> -->
+
+            <!-- <div class="text-danger" *ngIf="f['Reason'].touched  && f['Reason'].errors || f['Reason'].dirty && f['Reason'].errors ">
+                  Reason required</div> -->
+          </div>
+          <div mat-dialog-actions class="action-btns" class="btn-toolbar text-center-1 well justify-content-center">
+            <button style="margin: 10px;" mat-raised-button color="warn" type="submit"
+              [disabled]="!leaveForm.valid">Apply</button>
+            <button mat-raised-button type="reset" color="primary" [mat-dialog-close]="false">Cancel</button>
+          </div>
+          <!-- <div class="btn-toolbar text-center well justify-content-center mt-2">
+                <button type="submit" class="btn btn-primary" [disabled]="!leaveForm.valid" >Apply</button>
+                <button type="button" class="btn btn-danger" mat-dialog-close type="reset" (click)="onReset()">Cancel</button>
+              </div> -->
+        </div>
+
+      </form>
+    </div>
+
+    <!-- </div> -->
+
+  </ng-template>
+</div>

@@ -1,0 +1,57 @@
+<!-- login.component.html -->
+
+<div class="login-container">
+
+  <div class="signin-content" style="background-color: #3f51b5;">
+    <!-- <p class="h1 bold" style="color: white; text-align: center;">Syfrox</p> -->
+    <div class="text-center">
+      <img src="assets\SyfroxLogo.jpg" alt="syfrox" class="logoDefault ">
+    </div>
+    <mat-card style="top: 12%; border-radius: 25px;">
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <p class="h3 bold login-toolbar" style="color: #3f51b5; margin-bottom: 23px;">LogIn</p>
+          <mat-form-field class="full-width-input" appearance="outline">
+            <mat-label>Username</mat-label>
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <input matInput placeholder="userName" formControlName="username" [errorStateMatcher]="matcher">
+            <mat-error
+              *ngIf="f['username'].hasError('required') && (f['username'].touched|| f['username'].dirty)">Username is
+              Required
+            </mat-error>
+            <mat-error *ngIf="f['username'].hasError('minlength') && f['username'].dirty">
+              Please Enter Valid Name
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="full-width-input" appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" type="password" formControlName="password" required>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error> Password is Required</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button class="full-width" color="primary" [disabled]="!loginForm.valid">Login</button>
+          <div><a class="h6 forgot" routerLink='/forgotpassword'>Forgot Password</a></div>
+        </form>
+
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+
+
+
+  <!-- Image -->
+  <div class="login-image">
+    <!-- Your image goes here -->
+    <!-- Example: -->
+    <img src="assets/bg.jpg" alt="Login Image" />
+    <!-- background-image: url('src/assets/hrms.jpg'); -->
+  </div>
+</div>

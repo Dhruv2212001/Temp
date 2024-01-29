@@ -1,0 +1,111 @@
+.navbar{
+    height: auto;
+    width: auto;
+}
+
+.auth{
+    color: red;
+}
+.nav-link{
+    font-weight: 500;
+    
+}
+
+.nav-link.active{
+    color: #0d6efd !important;
+    background-color:#c0d1eb ;
+    font-weight: 600;
+    border-radius: 0.375rem;
+}
+/* .btnout{
+    position: relative;
+    width: auto;
+    left: 85%;
+    color: white;
+   
+   
+} */
+.signinbtn{
+    position: relative;
+    width: 90px;
+    left: 75%;
+   
+}
+
+/* .btn{
+    border-radius :20px;
+    color :white;
+    font-size :1rem;
+    font-weight: 400;
+    overflow: hidden;
+    position: relative;
+    background-color: rgb(4, 33, 126);
+}
+.btn:hover{
+    background-color: white;
+    color: black;
+    overflow: hidden;
+    position: relative;
+} */
+.dashboard{
+    position: absolute;
+    left: 35%;
+    top: 20px;
+    font-size: x-large;
+    /* color: white;
+    text-shadow: 2px 2px 4px #000000; */
+    /* color: rgb(2, 0, 0);
+    text-shadow: 1px 5px 5px rgb(12, 12, 218) */
+}
+.headerbutton:hover{
+    background-color:lightgray;
+    border-radius: 5px;
+    
+}
+.headerbutton{
+    position: absolute;
+    left: 0%;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: x-large;
+}
+.btn .fa-solid{
+    transition: 30ms ease-in-out;
+    transform: rotate(30 60deg);
+}
+.fa-solid{
+    font-size: x-large;
+
+}
+/* .toolbar{
+    position: relative;
+    left: 75%;
+} */
+.mat-icon-size {
+    position: absolute;
+    font-size: 35px;
+    height: 50px;
+    width: 50px;
+    top: 7px;
+    right: 0%;
+  }
+.fill-remaining-space{
+    position: relative;
+    left: 84%;
+  }
+.userShow{
+    position: relative;
+    left: 86%;
+}
+.mat-mdc-menu-item:hover{
+    color: rgb(29, 48, 153);
+    /* color: #aa3c9f; */
+}
+.mat-mdc-menu-item:hover .mat-icon-no-color{
+    /* color: #aa3c9f; */
+    color: rgb(29, 48, 153);
+}
+span:hover{
+    font-weight: 500!important;
+    /* font-size: large; */
+}

@@ -1,0 +1,193 @@
+.not-allowed[disabled] {
+  cursor: not-allowed !important;
+}
+
+::ng-deep .btn {
+  pointer-events: visible !important;
+}
+
+.image1 img {
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+  align-items: center;
+  object-fit: cover;
+}
+
+div .image1 img {
+  background: linear-gradient(rgb(223, 95, 95), rgb(74, 74, 211), rgb(202, 155, 66), rgb(223, 223, 32));
+  /* border: 1px solid red; */
+  padding: 2px;
+
+}
+
+.mat-mdc-card {
+  position: relative;
+  top: 0;
+}
+
+.buttonleave {
+  position: absolute;
+  right: 7%;
+  top: 35%;
+}
+
+
+.closepopup {
+  position: absolute;
+  right: 0%;
+}
+
+/* .mat-icon-size {
+  font-size: 32px;
+  height: 40px;
+  width: 36px;
+  position: relative;
+  left: 15px;
+} */
+
+.container-fluid {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.text-center {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  /* border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent; */
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  /* border-color: currentColor; */
+  /* border-top: 2px solid black;
+      border-bottom: 2px solid black ; */
+  background-color: rgb(221, 218, 218, 0.9)
+    /* background-color:#eeeef3 !important; */
+
+
+}
+
+.mat-mdc-header-row {
+  font-size: 17px;
+}
+
+
+th {
+  background-color: #3f51b5 !important;
+  color: white;
+}
+
+.mat-elevation-z8 {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchbox {
+  position: relative;
+  left: 2%;
+  width: 16%;
+}
+
+.input {
+  margin-left: 45px;
+  font-size: 17px;
+}
+
+.buttonleave {
+  position: absolute;
+  right: 10%;
+  top: 35%;
+}
+
+th {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+td {
+  font-family: 'Poppins', sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(218, 213, 213, 0.2);
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-form-field {
+  width: 50%;
+  margin: auto;
+}
+
+.main-body {
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+.action-icon:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* ::ng-deep.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #f3f3f3 !important;
+  width: 600px !important;
+} */
+
+div h1 {
+  text-align: center;
+  margin-top: -20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.action-btns {
+  justify-content: center;
+  position: relative;
+  bottom: 20px;
+}
+
+.action-btns button {
+  padding: 20px;
+}
+
+.mat-mdc-button {
+  --mat-mdc-button-persistent-ripple-color: none;
+}
+
+/* ::ng-deep.mat-mdc-text-field-wrapper {
+  width: 25%!important;
+} */
+
+.full {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  mat-form-field {
+
+    width: 100%;
+  }
+}
+
+/* .search-bar{
+  height: -15px!important;
+} */
+::ng-deep .mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow {
+  margin: 0 0 0 6px;
+  color: white!important;
+  font-size: large;
+
+}

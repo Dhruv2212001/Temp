@@ -1,0 +1,82 @@
+.not-allowed[disabled] {
+    cursor: not-allowed !important;
+}
+
+::ng-deep .btn {
+    pointer-events: visible !important;
+}
+
+.buttonleave {
+    position: absolute;
+    right: 10%;
+    top: 35%;
+}
+
+.searchbox {
+    position: relative;
+    left: 2%;
+}
+
+.input {
+    margin-left: 45px;
+    font-size: 17px;
+}
+
+.mat-elevation-z8 {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mdc-dialog__container .mat-mdc-button>.mat-icon {
+    margin-right: 0px !important;
+}
+
+.mat-mdc-header-row {
+    font-size: 17px;
+}
+
+
+th {
+    background-color: #3f51b5 !important;
+    color: white;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    /* border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent; */
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    /* border-color: currentColor; */
+    /* border-top: 2px solid black;
+      border-bottom: 2px solid black ; */
+    background-color: rgb(221, 218, 218, 0.9)
+        /* background-color:#eeeef3 !important; */
+
+
+}
+
+th {
+    font-family: 'Poppins', sans-serif;
+
+}
+
+td {
+    font-family: 'Poppins', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(218, 213, 213, 0.2);
+}
+
+.mat-mdc-button {
+    --mat-mdc-button-persistent-ripple-color: none;
+}
+
+::ng-deep.mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #f3f3f3 !important;
+    width: 600px !important;
+}

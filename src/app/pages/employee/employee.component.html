@@ -1,0 +1,283 @@
+<mat-card>
+    <div>
+        <mat-card-header style="height: 100px;">
+            <button class="buttonleave" (click)="openpopup(viewEmployeeForm)" mat-raised-button color="primary"
+                matTooltip="Click to Leave">Add Employee(+)</button>
+        </mat-card-header>
+    </div>
+</mat-card>
+
+<!-- <mat-form-field class="searchbox mt-5">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search record" />
+</mat-form-field> -->
+
+<mat-form-field class="example-full-width searchbox mt-5" appearance="outline">
+    <mat-label>Search</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input type="search" class="search-bar" matInput (keyup)="applyFilter($event)">
+    <!-- <button matSuffix mat-button class="trigger" (keyup)="applyFilter($event)"></button> -->
+    <!-- <mat-label style="font-family: 'Poppins', sans-serif;" class="input">Search</mat-label> -->
+
+</mat-form-field>
+
+
+
+<div class="mat-elevation-z8" id="form">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="mobileNumber">
+            <th mat-header-cell *matHeaderCellDef>Mobile</th>
+            <td mat-cell *matCellDef="let element">{{element.mobileNumber}}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef>City</th>
+            <td mat-cell *matCellDef="let element">{{element.city}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+                <button (click)="editEmployee(element)" mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                    color="primary">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element.id , element.email)" class="iconbutton"
+                    color="warn">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+</div>
+<!-- <div class="col-8">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="row">
+                        <div class="col-6 text-white">
+                            Employee Portal
+
+                        </div>
+                        <div class="col-6 text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Sr No</th>
+                                <th>Profile Image</th>
+                                <th>Name</th>
+                                <th>Contact No</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>Salary</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngFor="let item of employeeArray ; let sr= index">
+                                <td>{{sr+1}}</td>
+                                <div class="image1">
+                                    <td class="text-center"><img [src]="item.file" alt=""></td>
+
+                                </div>
+                                <td>{{item.empname}}</td>
+                                <td>{{item.empcontact}}</td>
+                                <td>{{item.empEmail}}</td>
+                                <td>{{item.city}}</td>
+                                <td>{{item.salary}}</td>
+                                <td class="d-flex justify-content-evenly">
+                                    <button class="btn btn-success btn-sm" (click)="onEdit(item.id)">Edit</button>
+                                    <button class="btn btn-danger btn-sm" (click)="onDelete(item.id)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div> -->
+
+<ng-template #viewEmployeeForm>
+    <mat-card>
+        <div>
+            <mat-dialog-actions class="closepopup">
+                <button (click)="closepopup()" mat-button color="primary" matDialogClose matTooltip="Close form">
+                    <mat-icon
+                        style="font-size: 25px;  height: 40px; width: 36px; position: relative; left: 20px;">close
+                    </mat-icon>
+                </button>
+            </mat-dialog-actions>
+        </div>
+
+        <div class="mt-5">
+            <div>
+                <h1 style="font-weight: 500;"> Employee Form</h1>
+            </div>
+
+            <form [formGroup]="empForm" (ngSubmit)="onSave()">
+                <mat-dialog-content class="content">
+
+                    <div class="row" *ngIf="!isEditMode">
+                        <mat-form-field appearance="outline">
+                            <mat-label>UserName</mat-label>
+                            <input matInput type="text" placeholder="i.e name" formControlName="userName" required>
+                            <mat-error>This field is Required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="i.e 15" type="password" formControlName="password">
+                            <mat-error>This field is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput type="text" placeholder="i.e David" formControlName="name">
+                            <mat-error>Reqired Name</mat-error>
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                                <mat-label>Last Name:</mat-label>
+                                <input matInput placeholder="i.e Smith" formControlName="lastname">
+                            </mat-form-field> -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date of birth</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="Enter your birth Date"
+                                formControlName="birthdate" required>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error>Birth Date is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" placeholder="i.e david@gmail.com" formControlName="email">
+                            <mat-error>invalid email address</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Blood Group</mat-label>
+                            <input matInput type="text" placeholder="i.e AB+" formControlName="bloodGroup" required>
+                            <mat-error>invalid Blood group</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px; margin-top: -17px;">
+                        <mat-radio-group aria-label="Select an option" formControlName="gender">
+                            <mat-label><b>Gender</b></mat-label>
+                            <mat-radio-button value="male">Male</mat-radio-button>
+                            <mat-radio-button value="female">Female</mat-radio-button>
+                            <!-- <mat-radio-button value="others">Others</mat-radio-button>
+                                <mat-radio-button value="others">Not Interested</mat-radio-button> -->
+                        </mat-radio-group>
+
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Contact</mat-label>
+                            <input matInput placeholder="Phone number" formControlName="mobileNumber" required>
+                            <mat-error>Please enter valid mumber</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="Your city name " formControlName="city">
+                            <mat-error *ngIf="empForm.controls['city'].hasError('required')">
+                                City is required..
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full" appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput placeholder="Enter Your Full Address"
+                                formControlName="address"></textarea>
+                            <mat-error *ngIf="empForm.controls['address'].hasError('required')">
+                                Address is required
+
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>joining date</mat-label>
+                            <input matInput [matDatepicker]="date" placeholder="Enter your Date"
+                                formControlName="joiningDate" required>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+                            <mat-datepicker #date></mat-datepicker>
+                            <mat-error>enter joining Date</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Organization</mat-label>
+                            <input matInput type="text" placeholder="i.e name" formControlName="organization" required>
+                            <mat-error>enter text</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Role</mat-label>
+                            <mat-select matInput placeholder="Select Role" formControlName="role" required>
+                                <mat-option value="Developer">Developer</mat-option>
+                                <mat-option value="Jr Developer">Jr Developer</mat-option>
+                                <mat-option value="trainee">trainee</mat-option>
+
+                            </mat-select>
+                            <mat-error>please select your role</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>designation</mat-label>
+                            <input matInput placeholder="i.e 15" type="text" formControlName="designation">
+                            <mat-error>please select your designation</mat-error>
+                            <!-- <mat-hint>In dollar</mat-hint> -->
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>AssignManager</mat-label>
+                            <input matInput type="text" placeholder="i.e name" formControlName="assignedManager"
+                                required>
+                            <mat-error>This field is Required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Status</mat-label>
+                            <input matInput placeholder="i.e 15" type="text" formControlName="status">
+                            <mat-error>This field is Required</mat-error>
+                        </mat-form-field>
+                    </div> -->
+                </mat-dialog-content>
+
+                <div mat-dialog-actions class="action-btns">
+                    <button style="margin: 10px;" mat-raised-button color="warn" *ngIf="!router_id"
+                        [disabled]="!empForm.valid" mat-dialog-close type="submit">Save</button>
+                    <button style="margin: 10px;" mat-raised-button color="warn" (click)="onUpdate(this.empForm.value)"
+                        *ngIf="router_id" [disabled]="!empForm.valid" mat-dialog-close>UpdateEmployee</button>
+                    <button mat-raised-button type="reset" color="primary" [mat-dialog-close]="false">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+    </mat-card>
+
+
+</ng-template>

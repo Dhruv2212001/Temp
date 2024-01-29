@@ -1,0 +1,13 @@
+.margin-left{
+    margin-left: -10px !important;
+}
+.div{
+    background-color: hwb(0 95% 5%);
+}
+
+.not-allowed[disabled]{
+    cursor: not-allowed !important;
+}
+::ng-deep .btn {
+    pointer-events: visible!important;
+}

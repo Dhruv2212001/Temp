@@ -1,0 +1,200 @@
+<mat-card>
+    <div>
+        <mat-card-header style="height: 100px;">
+            <button class="buttonleave" (click)="openpopup(viewSalaryForm)" mat-raised-button color="primary" matTooltip="Click to Leave">Add Salary
+                (+)</button>
+        </mat-card-header>
+    </div>
+
+
+</mat-card>
+
+
+<mat-form-field class="searchbox mt-5">
+  
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search record" />
+    
+  </mat-form-field>
+  <mat-label style="font-family: 'Poppins', sans-serif;" class="input">Search Box</mat-label>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="empname">
+        <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+        <td mat-cell *matCellDef="let element">{{element.empname}}</td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="salaryDate">
+        <th mat-header-cell *matHeaderCellDef>Date of Salary</th>
+        <td mat-cell *matCellDef="let element">{{element.salaryDate}}</td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="salaryAmount">
+        <th mat-header-cell *matHeaderCellDef>Salary Amout</th>
+        <td mat-cell *matCellDef="let element">{{element.salaryAmount}}</td>
+      </ng-container>
+  
+      <!-- <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">Edit</td>
+        <td mat-cell *matCellDef="let element">Delete</td>
+      </ng-container> -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+          <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn"  (click)="onDelete(element.id)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+<!-- 
+<div class="div m-3 p-5">
+    <div class="row"> -->
+        <!-- <div class="col-8">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="row">
+                        <div class="col-6 text-white">
+                            Salary Portal
+
+                        </div>
+                        <div class="col-6 text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Sr No</th>
+                                <th>Name</th>
+                                <th>Salary Date</th>
+                                <th>salaryAmount</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngFor="let item of salaryArray; let sr= index">
+                                <td>{{sr+1}}</td>
+                                <td>{{item.empname}}</td>
+                                <td>{{item.salaryDate | date: 'dd-MMM-yyyy'}}</td>
+                                <td>{{item.salaryAmount}}</td>
+                                <td class="d-flex justify-content-evenly">
+                                    <button class="btn btn-success btn-sm margin-left"
+                                        (click)="onEdit(item.id)">Edit</button>
+                                    <button class="btn btn-danger btn-sm margin-left"
+                                        (click)="onDelete(item.id)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div> -->
+<!-- 
+        </div> -->
+    
+  <ng-template #viewSalaryForm>
+    <mat-dialog-actions class="closepopup">
+      <button (click)="closepopup()" mat-button color="primary" matDialogClose matTooltip="Close form
+       "> <mat-icon>close</mat-icon></button>
+    </mat-dialog-actions>
+        <div class="container-fluid d-flex justify-content-center mt-5">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="row">
+                        <div class="col-6 text-white">
+                            New Salary
+
+                        </div>
+                        <div class="col-6 text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: rgb(242, 248, 248);">
+                    <form [formGroup]="salaryForm" (ngSubmit)=" submitForm()">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="">Select Employee Name</label>
+                                <select name="empname" class="form-control" formControlName="empname"
+                                    (change)="employeeNameData($event)"
+                                    [ngClass]="{ 'is-invalid': f['empname'].touched && f['empname'].errors, 'is-valid': f['empname'].valid }"
+                                    required>
+                                    <option *ngFor="let emp of dataSource" [value]="emp.id">{{emp.empname}}
+                                    </option>
+                                </select>
+                                <small class="text-danger"
+                                    *ngIf="f['empname'].touched && f['empname'].errors && !f['empname'].dirty">Employee
+                                    Name is
+                                    required</small>
+                            </div>
+                            <div class="col-6">
+                                <label for="">Salary Date</label>
+                                <input type="date" class="form-control" name="salaryDate" formControlName="salaryDate"
+                                    [ngClass]="{ 'is-invalid': f['salaryDate'].touched && f['salaryDate'].errors, 'is-valid': f['salaryDate'].valid }">
+                                <small class="text-danger"
+                                    *ngIf="f['salaryDate'].touched && f['salaryDate'].errors && !f['salaryDate'].dirty">Date
+                                    is
+                                    required</small>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="">Salary Amount</label>
+                                <input type="text" name="salaryAmount" class="form-control"
+                                    formControlName="salaryAmount"
+                                    [ngClass]="{ 'is-invalid': f['salaryAmount'].touched && f['salaryAmount'].errors, 'is-valid': f['salaryAmount'].valid }"
+                                    required>
+                                <small class="text-danger"
+                                    *ngIf="f['salaryAmount'].touched && f['salaryAmount'].errors && !f['salaryAmount'].dirty">Amount
+                                    is
+                                    required</small>
+                            </div>
+
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-6 text-center mt-3 mb-2">
+                                <button class="btn btn-secondary btn-sm" type="reset"
+                                    (click)="onReset() ">Reset</button>
+                            </div>
+                            <div class="col-6 text-center  mt-3 mb-2">
+                                <button class=" button not-allowed" style="border-radius: 8px;" *ngIf="!route_id"
+                                    type="submit" (click)="onSave()"
+                                    [disabled]="(this.disable || !this.salaryForm.valid )">Save Employee</button>
+                                <button class="btn btn-warning btn-sm" *ngIf="route_id" type="submit"
+                                    (click)="onUpdate()" [disabled]="(!this.salaryForm.valid )">Update Employee</button>
+                            </div>
+                        </div> -->
+                        
+                        <div class="btn-toolbar text-center well justify-content-center mt-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!salaryForm.valid" >Apply</button>
+                            <button type="button" class="btn btn-danger" mat-dialog-close type="reset" (click)="onReset()">Cancel</button>
+                        </div>
+                        
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </ng-template>
+
+
